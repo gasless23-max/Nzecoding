@@ -1,0 +1,30 @@
+{
+  "name": "@build-and-code/database",
+  "version": "0.1.0",
+  "description": "Database layer and schema",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "migrate": "node --loader ts-node/esm ./scripts/migrate.ts",
+    "seed": "node --loader ts-node/esm ./scripts/seed.ts"
+  },
+  "dependencies": {
+    "@build-and-code/shared": "*",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.11.0",
+    "typescript": "^5.4.0"
+  }
+}
