@@ -1,58 +1,12 @@
-import React from "react";
-import { useApp } from "../context/app";
+import { Activity, ArrowUpRight, BarChart3, Bot, Boxes, ChevronRight, PlusCircle, Clock3, GitBranch, LayoutDashboard, Menu, Plus, Settings2, Sparkles, TerminalSquare, User, Zap } from "lucide-react";
+import { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+const metrics = [{ label: "Builds this month", value: "24", delta: "+18%", icon: Zap }, { label: "Agent success rate", value: "96.4%", delta: "+4.2%", icon: Activity }, { label: "Time saved", value: "18.6h", delta: "+12%", icon: Clock3 }];
+const activity = [{ title: "Creator analytics platform", detail: "Verification passed · 2m ago", color: "green" }, { title: "Authentication repair loop", detail: "Fixed 3 TypeScript errors · 18m ago", color: "blue" }, { title: "Marketing site", detail: "Diff awaiting review · 1h ago", color: "amber" }];
 
 export function Dashboard(): JSX.Element {
-  const { user } = useApp();
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Welcome, {user?.name || "Developer"}
-          </h1>
-          <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-            Your autonomous AI software engineering workspace
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {/* Recent Projects Card */}
-          <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-6 shadow-sm hover:shadow-md transition-shadow">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              Recent Projects
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400">No projects yet</p>
-          </div>
-
-          {/* Quick Stats Card */}
-          <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-6 shadow-sm hover:shadow-md transition-shadow">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              Activity
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400">No activity yet</p>
-          </div>
-
-          {/* Templates Card */}
-          <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-6 shadow-sm hover:shadow-md transition-shadow">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              Templates
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400">Browse starter templates</p>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-brand-600 to-brand-700 rounded-lg p-8 text-white">
-          <h2 className="text-2xl font-bold mb-4">Start Building</h2>
-          <p className="mb-6 text-brand-100">
-            Tell the AI what you want to build, and it will handle the rest.
-          </p>
-          <button className="bg-white text-brand-700 px-6 py-3 rounded-lg font-semibold hover:bg-brand-50 transition-colors">
-            Create New Project
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+  const navigate = useNavigate(); const [prompt, setPrompt] = useState("");
+  const submit = (event: FormEvent) => { event.preventDefault(); navigate(`/projects/creator-analytics?prompt=${encodeURIComponent(prompt || "Build me a creator analytics platform")}`); };
+  return <div className="app-shell"><aside className="sidebar"><Link to="/" className="brand"><span className="brand-mark">B</span> BUILD &amp; CODE</Link><span className="sidebar-label">WORKSPACE</span><Link className="nav-item active" to="/dashboard"><LayoutDashboard /> Overview</Link><Link className="nav-item" to="/projects"><Boxes /> Projects <span className="nav-count">3</span></Link><Link className="nav-item" to="/github"><GitBranch /> GitHub</Link><span className="sidebar-label">SYSTEM</span><Link className="nav-item" to="/templates"><Sparkles /> Templates</Link><Link className="nav-item" to="/settings"><Settings2 /> Settings</Link><div className="sidebar-bottom"><div className="plan-pill"><span className="status-dot" /><div><b>Local development</b><small>Provider boundaries active</small></div></div><div className="user-row"><span className="avatar">AC</span><div><b>Alex Chen</b><small>Personal workspace</small></div><ChevronRight /></div></div></aside><main className="dashboard-main"><header className="mobile-header"><Menu /><span className="brand">BUILD &amp; CODE</span><User /></header><div className="dashboard-header"><div><span className="eyebrow">MONDAY, SEPTEMBER 7, 2026</span><h1>Good morning, Alex.</h1><p>Turn the next idea into working software.</p></div><button className="button button-secondary"><TerminalSquare data-icon="inline-start" /> Command palette <kbd>⌘ K</kbd></button></div><section className="build-command"><div className="command-heading"><div className="command-icon"><Bot /></div><div><span className="eyebrow">START A NEW BUILD</span><h2>What are you building?</h2></div></div><form onSubmit={submit}><input value={prompt} onChange={(event) => setPrompt(event.target.value)} placeholder="Build me a creator analytics platform" aria-label="What are you building?" /><button className="button button-primary" type="submit">Build with AI <ArrowUpRight data-icon="inline-end" /></button></form><div className="suggestions"><button onClick={() => setPrompt("Build me a creator analytics platform")}>Creator analytics</button><button onClick={() => setPrompt("Build me a SaaS dashboard")}>SaaS dashboard</button><button onClick={() => setPrompt("Build me a REST API")}>REST API</button><button onClick={() => setPrompt("Build me a marketplace")}>Marketplace</button></div></section><div className="metric-grid">{metrics.map(({ label, value, delta, icon: Icon }) => <article className="metric-card" key={label}><div className="metric-top"><span>{label}</span><Icon /></div><strong>{value}</strong><small><span className="positive">{delta}</span> vs last month</small></article>)}</div><div className="dashboard-grid"><section className="panel projects-panel"><div className="panel-header"><div><span className="eyebrow">RECENT PROJECTS</span><h2>Keep building</h2></div><Link to="/projects">View all <ArrowUpRight /></Link></div><Link className="project-card featured" to="/projects/creator-analytics"><div className="project-card-top"><span className="project-icon"><BarChart3 /></span><span className="status-badge success"><span className="status-dot" /> Building</span></div><h3>Creator analytics platform</h3><p>Understand audience growth, content performance, and revenue in one calm dashboard.</p><div className="project-meta"><span>React + Vite</span><span>Updated 2m ago</span><span>main</span></div><div className="progress-line"><span /></div></Link><div className="project-list"><Link to="/projects/marketing-site"><span className="project-icon small"><Sparkles /></span><div><b>Marketing site</b><small>Diff awaiting review</small></div><ChevronRight /></Link><Link to="/projects/api"><span className="project-icon small"><TerminalSquare /></span><div><b>Metrics API</b><small>Last built yesterday</small></div><ChevronRight /></Link></div><button className="new-project" onClick={() => navigate("/projects/creator-analytics")}><PlusCircle /> Start another project</button></section><section className="panel activity-panel"><div className="panel-header"><div><span className="eyebrow">AGENT ACTIVITY</span><h2>Execution history</h2></div><button className="icon-button" aria-label="Add activity"><Plus /></button></div><div className="activity-list">{activity.map((item) => <div className="activity-item" key={item.title}><span className={`activity-dot ${item.color}`} /><div><b>{item.title}</b><small>{item.detail}</small></div><ChevronRight /></div>)}</div><div className="usage-card"><div><span className="eyebrow">MONTHLY USAGE</span><strong>18.6 / 40 hrs</strong></div><div className="usage-ring">47%</div></div></section></div></main><nav className="mobile-nav"><Link className="active" to="/dashboard"><LayoutDashboard /><span>Chat</span></Link><Link to="/projects/creator-analytics"><Boxes /><span>Workspace</span></Link><Link to="/projects/creator-analytics?tab=preview"><BarChart3 /><span>Preview</span></Link><Link to="/github"><GitBranch /><span>Git</span></Link><Link to="/settings"><Menu /><span>More</span></Link></nav></div>;
 }
