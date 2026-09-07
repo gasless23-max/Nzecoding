@@ -1,0 +1,9 @@
+[project]
+name = "build-code-python"
+version = "0.1.0"
+description = "Build & Code Python starter"
+requires-python = ">=3.10"
+dependencies = ["fastapi>=0.110", "uvicorn[standard]>=0.29"]
+
+[tool.uvicorn]
+app = "src.main:app"
