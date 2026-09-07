@@ -1,4 +1,4 @@
-import { Workspace, FRAMEWORKS, LANGUAGES } from "@build-and-code/shared";
+import { Workspace } from "@build-and-code/shared";
 
 export interface ProjectAnalysis {
   framework?: string;

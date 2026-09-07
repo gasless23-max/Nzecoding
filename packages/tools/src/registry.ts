@@ -4,7 +4,7 @@ export interface ToolRegistry {
   [key: string]: Tool;
 }
 
-export class ToolRegistryImpl implements ToolRegistry {
+export class ToolRegistryImpl {
   private tools: Map<string, Tool> = new Map();
 
   register(name: string, tool: Tool): void {

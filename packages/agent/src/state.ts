@@ -1,4 +1,4 @@
-import { AgentTask, AgentStep } from "@build-and-code/shared";
+import { AgentStep } from "@build-and-code/shared";
 
 export interface AgentExecutionState {
   taskId: string;

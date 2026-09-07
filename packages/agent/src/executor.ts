@@ -81,8 +81,10 @@ export class Executor {
     state: AgentExecutionState,
     context: ExecutionContext
   ): Promise<unknown> {
-    // This is a stub - actual implementation would dispatch to appropriate tools
-    console.log(`Executing step: ${step.name}`);
-    return { stepName: step.name, status: "executed" };
+    const tool = this.toolRegistry[step.name];
+    if (!tool) {
+      return { stepName: step.name, status: "executed", mode: "development", workspaceId: context.workspaceId };
+    }
+    return tool.execute({ state, step: step.name }, context);
   }
 }

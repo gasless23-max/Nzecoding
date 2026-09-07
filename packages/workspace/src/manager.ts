@@ -18,6 +18,15 @@ export class WorkspaceManager {
     };
   }
 
+  private resolveSafePath(filePath: string): string {
+    const resolved = path.resolve(this.workspacePath, filePath);
+    const root = path.resolve(this.workspacePath);
+    if (resolved !== root && !resolved.startsWith(`${root}${path.sep}`)) {
+      throw new Error(`Path escapes workspace boundary: ${filePath}`);
+    }
+    return resolved;
+  }
+
   async initialize(): Promise<void> {
     try {
       await fs.mkdir(this.workspacePath, { recursive: true });
@@ -34,7 +43,7 @@ export class WorkspaceManager {
     fileType: "file" | "directory" = "file"
   ): Promise<WorkspaceFile> {
     try {
-      const fullPath = path.join(this.workspacePath, filePath);
+      const fullPath = this.resolveSafePath(filePath);
       const dir = path.dirname(fullPath);
 
       await fs.mkdir(dir, { recursive: true });
@@ -63,7 +72,7 @@ export class WorkspaceManager {
 
   async readFile(filePath: string): Promise<string> {
     try {
-      const fullPath = path.join(this.workspacePath, filePath);
+      const fullPath = this.resolveSafePath(filePath);
       return await fs.readFile(fullPath, "utf-8");
     } catch (error) {
       throw new Error(`Failed to read file ${filePath}: ${error}`);
@@ -72,7 +81,7 @@ export class WorkspaceManager {
 
   async updateFile(filePath: string, content: string): Promise<WorkspaceFile> {
     try {
-      const fullPath = path.join(this.workspacePath, filePath);
+      const fullPath = this.resolveSafePath(filePath);
       await fs.writeFile(fullPath, content, "utf-8");
 
       const fileIndex = this.workspace.files.findIndex((f) => f.path === filePath);
@@ -99,7 +108,7 @@ export class WorkspaceManager {
 
   async deleteFile(filePath: string): Promise<void> {
     try {
-      const fullPath = path.join(this.workspacePath, filePath);
+      const fullPath = this.resolveSafePath(filePath);
       await fs.rm(fullPath, { recursive: true, force: true });
 
       this.workspace.files = this.workspace.files.filter((f) => f.path !== filePath);
@@ -111,7 +120,7 @@ export class WorkspaceManager {
 
   async listFiles(dirPath: string = ""): Promise<WorkspaceFile[]> {
     try {
-      const fullPath = path.join(this.workspacePath, dirPath);
+      const fullPath = this.resolveSafePath(dirPath);
       const entries = await fs.readdir(fullPath, { withFileTypes: true });
 
       return entries.map((entry) => ({
