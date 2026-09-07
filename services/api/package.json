@@ -14,9 +14,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@build-and-code/shared": "*",
-    "@build-and-code/database": "*",
-    "@build-and-code/agent": "*",
+    "@build-and-code/shared": "workspace:*",
+    "@build-and-code/database": "workspace:*",
+    "@build-and-code/agent": "workspace:*",
     "express": "^4.18.0",
     "cors": "^2.8.5",
     "helmet": "^7.1.0",

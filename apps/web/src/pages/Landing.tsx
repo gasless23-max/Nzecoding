@@ -1,88 +1,20 @@
-import React from "react";
+import { ArrowRight, Bot, Braces, Check, LockKeyhole, Play, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const capabilities = [
+  [Bot, "Autonomous execution", "Turn a brief into a plan, implementation, verification, and a repair loop."],
+  [Braces, "A real workspace", "Files, code, diffs, preview, terminal, and Git history in one focused surface."],
+  [LockKeyhole, "Safe by design", "Provider boundaries, approvals, workspace isolation, and no hidden credential access."],
+];
 
 export function LandingPage(): JSX.Element {
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
-      {/* Navigation */}
-      <nav className="border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold text-brand-600">Build & Code</div>
-          <div className="flex gap-4">
-            <button className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-              Sign In
-            </button>
-            <button className="bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-700 transition-colors">
-              Get Started
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 py-24">
-        <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
-            Describe it. Build it. Ship it.
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
-            Build, code, test, debug, preview, and ship software with an autonomous AI engineering
-            workspace.
-          </p>
-          <button className="bg-brand-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-brand-700 transition-colors">
-            Start Building with AI
-          </button>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="bg-gray-50 dark:bg-gray-900 py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">Core Capabilities</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "AI Project Generation",
-                description: "Create projects from natural language descriptions",
-              },
-              {
-                title: "Autonomous Coding",
-                description: "AI writes, modifies, and optimizes code",
-              },
-              {
-                title: "Integrated Terminal",
-                description: "Run commands and see results in real-time",
-              },
-              {
-                title: "Live Preview",
-                description: "See changes instantly across devices",
-              },
-              {
-                title: "Git & GitHub",
-                description: "Built-in version control and repository management",
-              },
-              {
-                title: "Error Repair",
-                description: "AI detects and automatically fixes issues",
-              },
-            ].map((feature, i) => (
-              <div
-                key={i}
-                className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700"
-              >
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-800 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
-          <p>&copy; 2024 Build & Code. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
+  return <div className="landing">
+    <header className="topbar"><Link className="brand" to="/"><span className="brand-mark">B</span> BUILD <span>&amp;</span> CODE</Link><nav><a href="#workflow">Workflow</a><a href="#security">Security</a><Link to="/login">Sign in</Link><Link className="button button-primary button-small" to="/dashboard">Open workspace <ArrowRight data-icon="inline-end" /></Link></nav></header>
+    <main>
+      <section className="hero page-shell"><div className="hero-copy"><span className="eyebrow"><Sparkles data-icon="inline-start" /> AUTONOMOUS ENGINEERING WORKSPACE</span><h1>Describe it.<br /><em>Build it.</em><br />Ship it.</h1><p>Build, code, test, debug, preview, and ship software with an autonomous AI engineering workspace that keeps every decision observable.</p><div className="hero-actions"><Link className="button button-primary" to="/dashboard">Start building <ArrowRight data-icon="inline-end" /></Link><a className="button button-ghost" href="#preview"><Play data-icon="inline-start" /> See how it works</a></div><div className="trust-row"><span><Check data-icon="inline-start" /> No hidden execution</span><span><Check data-icon="inline-start" /> Diff before apply</span><span><Check data-icon="inline-start" /> Git-ready</span></div></div><div className="hero-console" id="preview"><div className="window-bar"><span className="window-dots">● ● ●</span><span>creator-analytics / agent-run</span><span>⌘ K</span></div><div className="console-grid"><aside><span className="muted-label">EXPLORER</span><b>▾ creator-analytics</b><span>  ◇ src</span><span>  ◇ dashboard.tsx</span><span>  ◇ metrics.ts</span><span>  ◇ package.json</span><span>  ◇ README.md</span></aside><div className="code-preview"><div className="code-line"><i>01</i><span><strong>const</strong> dashboard = <mark>await</mark> build({"{"}</span></div><div className="code-line"><i>02</i><span>  intent: <u>“creator analytics”</u>,</span></div><div className="code-line"><i>03</i><span>  framework: <u>“react-vite”</u>,</span></div><div className="code-line"><i>04</i><span>  verification: <strong>true</strong>,</span></div><div className="code-line"><i>05</i><span>{"}"});</span></div><div className="agent-note"><span className="status-dot" /> Agent verified build <b>4/4</b><small>2m 14s</small></div></div></div></div></section>
+      <section className="section page-shell" id="workflow"><div className="section-heading"><span className="eyebrow">ONE LOOP, FULLY OBSERVABLE</span><h2>From first sentence<br />to working software.</h2><p>Every action is a structured event you can inspect, approve, and replay.</p></div><div className="workflow-strip">{["Understand", "Plan", "Execute", "Verify", "Repair", "Ship"].map((step, index) => <div className="workflow-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < 5 && <ArrowRight />}</div>)}</div></section>
+      <section className="section section-muted page-shell"><div className="section-heading"><span className="eyebrow">BUILT FOR THE WORK</span><h2>Not another chat box.</h2><p>A calm, high-density command center for serious product work.</p></div><div className="capability-grid">{capabilities.map(([Icon, title, text]) => <article className="capability" key={title as string}><Icon /><h3>{title as string}</h3><p>{text as string}</p></article>)}</div></section>
+      <section className="security-band page-shell" id="security"><div><span className="eyebrow"><LockKeyhole data-icon="inline-start" /> SECURITY FIRST</span><h2>Your code stays in its lane.</h2><p>Generated workspaces are designed to run behind explicit sandbox interfaces with limits, approvals, and secret boundaries. No .env files. No silent pushes.</p></div><div className="security-list"><span><Check /> Path validation</span><span><Check /> Command allowlists</span><span><Check /> Approval gates</span><span><Check /> Structured audit trail</span></div></section>
+    </main><footer className="footer page-shell"><Link className="brand" to="/"><span className="brand-mark">B</span> BUILD &amp; CODE</Link><span>Describe it. Build it. Ship it.</span><span>© 2026 Build &amp; Code</span></footer>
+  </div>;
 }

@@ -19,7 +19,7 @@
     "seed": "node --loader ts-node/esm ./scripts/seed.ts"
   },
   "dependencies": {
-    "@build-and-code/shared": "*",
+    "@build-and-code/shared": "workspace:*",
     "pg": "^8.11.0"
   },
   "devDependencies": {

@@ -11,9 +11,9 @@
     "format": "prettier --write src"
   },
   "dependencies": {
-    "@build-and-code/shared": "*",
-    "@build-and-code/agent": "*",
-    "@build-and-code/tools": "*",
+    "@build-and-code/shared": "workspace:*",
+    "@build-and-code/agent": "workspace:*",
+    "@build-and-code/tools": "workspace:*",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-router-dom": "^6.20.0",

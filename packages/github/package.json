@@ -18,7 +18,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@build-and-code/shared": "*",
+    "@build-and-code/shared": "workspace:*",
     "@octokit/rest": "^20.0.0",
     "@octokit/auth-oauth-device": "^6.0.0"
   },

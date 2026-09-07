@@ -18,10 +18,10 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@build-and-code/shared": "*",
-    "@build-and-code/tools": "*",
-    "langchain": "^0.1.0",
-    "langgraph": "^0.1.0"
+    "@build-and-code/shared": "workspace:*",
+    "@build-and-code/tools": "workspace:*",
+    "langchain": "^0.3.0",
+    "@langchain/langgraph": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Autonomous AI software engineering workspace",
   "private": true,
+  "packageManager": "pnpm@9.15.5",
   "type": "module",
   "scripts": {
     "dev": "turbo run dev --parallel",
