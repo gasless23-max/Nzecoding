@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "noEmit": true,
     "declaration": true,
