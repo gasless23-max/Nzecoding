@@ -15,12 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Health check
-app.get("/health", (req: Request, res: Response) => {
+app.get("/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", timestamp: new Date() });
 });
 
 // API Routes
-app.get("/api/projects", (req: Request, res: Response) => {
+app.get("/api/projects", (_req: Request, res: Response) => {
   res.json({ projects: [] });
 });
 
@@ -28,16 +28,16 @@ app.post("/api/projects", (req: Request, res: Response) => {
   res.status(201).json({ id: "project-1", name: req.body.name });
 });
 
-app.get("/api/agent/runs", (req: Request, res: Response) => {
+app.get("/api/agent/runs", (_req: Request, res: Response) => {
   res.json({ runs: [] });
 });
 
-app.post("/api/agent/runs", (req: Request, res: Response) => {
+app.post("/api/agent/runs", (_req: Request, res: Response) => {
   res.status(201).json({ id: "run-1", status: "queued" });
 });
 
 // 404 handler
-app.use((req: Request, res: Response) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).json({ error: "Not found" });
 });
 
