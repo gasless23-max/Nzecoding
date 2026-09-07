@@ -7,13 +7,11 @@ export interface GitHubConfig {
 
 export class GitHubClient {
   private octokit: Octokit;
-  private owner: string | null;
 
   constructor(config: GitHubConfig) {
     this.octokit = new Octokit({
       auth: config.token,
     });
-    this.owner = config.owner || null;
   }
 
   async getAuthenticatedUser(): Promise<{
